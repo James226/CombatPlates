@@ -307,7 +307,7 @@ function CombatPlates:UpdateLife(nUnitId)
 			tData.window:FindChild("Health"):Show(true)
 		end
 		
-		local nAvailableLife, nAvailableWidth = self:SetLifeBarWidth(tData.window:FindChild("Absorption"), tLife[2] + tLife[6], tData.lifeWidth, tLife[6], tLife[5])
+		local nAvailableLife, nAvailableWidth = self:SetLifeBarWidth(tData.window:FindChild("Absorption"), tLife[2] + tLife[5], tData.lifeWidth, tLife[5], tLife[5])
 		self:SetShieldWidth(tData.window:FindChild("Shield"), tLife[2], nAvailableWidth, tLife[4], tLife[3], 0)
 		self:SetLifeBarWidth(tData.window:FindChild("Health"), nAvailableLife, nAvailableWidth, tLife[2], tLife[1])
 		
@@ -330,7 +330,7 @@ function CombatPlates:SetShieldWidth(uWindow, nTotalNumber, nTotalPixels, nValue
 		nCurrentPixels = nTotalPixels
 	end
 	
-	uWindow:SetAnchorOffsets(-(nCurrentPixels + nPixelsAdjustment), 0, -nPixelsAdjustment, 2)
+	uWindow:SetAnchorOffsets(-(nCurrentPixels + nPixelsAdjustment), 0, -nPixelsAdjustment, 5)
 end
 
 function CombatPlates:SetLifeBarWidth(uWindow, nTotalNumber, nTotalPixels, nValueNumber, nCurrentNumber)
@@ -946,6 +946,19 @@ end
 
 --- create object ---
 
+---------------------------------------------------------------------------------------------------
+-- Nameplate Functions
+---------------------------------------------------------------------------------------------------
+
+function CombatPlates:OnTarget( wndHandler, wndControl, eMouseButton, nLastRelativeMouseX, nLastRelativeMouseY, bDoubleClick, bStopPropagation )
+	if wndHandler == wndControl then
+		GameLib.SetTargetUnit(wndHandler:GetUnit())
+		return true
+	end
+end
+
 local CombatPlatesInst = CombatPlates:new()
 CombatPlatesInst:Init()
+
+
 
